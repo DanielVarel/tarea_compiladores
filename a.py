@@ -1,7 +1,8 @@
 import re  # Importamos el módulo de expresiones regulares
 
+
+def validar_texto(texto):
 #inciso inciso a
-def validar_fechas(texto):
     fechas_cortas = re.findall(r'\b\d{2}-\d{2}-\d{2}\b', texto)
 
     fechas_largas = re.findall(
@@ -18,12 +19,9 @@ def validar_fechas(texto):
         print(" Fechas en formato largo encontradas:", fechas_largas)
     else:
         print(" No se encontraron fechas en formato largo.")
-
-texto = """
-Hoy es sábado, 15 de junio de 2024.
-También tenemos una fecha abreviada: 24-06-15.
-Y otra larga: lunes, 03 de marzo de 2025.
-"""
-validar_fechas(texto)
-
 #fin inciso a
+
+texto_de_prueba = """
+Hoy es sábado, 15 de junio de 2024. También tenemos una fecha abreviada: 24-06-15. Y otra larga: lunes, 03 de marzo de 2025.
+"""
+validar_texto(texto_de_prueba)
