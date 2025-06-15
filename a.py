@@ -1,9 +1,10 @@
+import os
 import re  # Importamos el módulo de expresiones regulares
 
 
 def validar_texto(texto):
     
-#inciso inciso a
+#inicio inciso a
     fechas_cortas = re.findall(r'\b\d{2}-\d{2}-\d{2}\b', texto)
 
     fechas_largas = re.findall(
@@ -38,6 +39,60 @@ print("Texto original:", textoB)
 print("Texto modificado:", resultado)
 
 #fin inciso b
+
+#inicio inciso c
+
+def encontrar_archivos(ruta_directorio, formato):
+    try:
+        archivos = os.listdir(ruta_directorio)
+    except FileNotFoundError:
+        print(f"❌ La ruta especificada no existe: {ruta_directorio}")
+        return []
+
+    patron = re.compile(rf'.*\.{formato}$', re.IGNORECASE)
+    
+    archivos_formato = [archivo for archivo in archivos if patron.match(archivo)]
+    
+    return archivos_formato
+
+ruta = input("Ingresa la ruta del directorio (por ejemplo, C:\\Documentos): ").strip()
+formato = input("Ingresa el tipo de archivo (por ejemplo, txt, pdf, jpg): ").strip()
+
+
+resultado = encontrar_archivos(ruta, formato)
+
+if resultado:
+    print("\n Archivos encontrados:")
+    print(resultado)
+else:
+    print("\n No se encontraron archivos con ese formato en la ruta especificada.")
+
+#final inciso c
+
+#inicio inciso d
+
+def validar_usuario(nombre_usuario):
+    patron = r'^[a-zA-Z0-9_-]{8,12}$'
+    if re.fullmatch(patron, nombre_usuario):
+        return True
+    else:
+        return False
+
+#Ejemplos
+usuarios = [
+    "usuario_01",     # válido
+    "user-1234",      # válido
+    "user!",          # inválido (carácter no permitido y menos de 8 caracteres)
+    "us",             # inválido (muy corto, menos de 8 caracteres)
+    "usuario_extralargo",  # inválido (muy largo, mas de 8 caracteres)
+    "user_name-12"    # válido
+]
+
+#Prueba de usuarios
+for u in usuarios:
+    print(f"{u}: {'Válido' if validar_usuario(u) else 'Inválido'}")
+
+#final inciso d
 
 #inicio inciso e
 
